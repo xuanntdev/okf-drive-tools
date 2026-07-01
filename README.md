@@ -17,23 +17,49 @@ Claude Code plugin: validate, push, và query tài liệu OKF (Open Knowledge Fl
 
 ## Cài đặt
 
-**Claude Code (đã xác nhận hỗ trợ):**
+> **Yêu cầu:** Claude Code CLI · Python 3 · Git Bash (Windows — cho hook runtime)
+
+### Bước 1 — Clone repo
 
 ```bash
-# Dev/test nhanh trong 1 session (không cần marketplace):
-claude --plugin-dir /path/to/okf-drive-tools
-
-# Cài lâu dài — repo này TỰ LÀ marketplace (đã có .claude-plugin/marketplace.json,
-# source: "." trỏ về chính plugin ở root repo):
-/plugin marketplace add /path/to/okf-drive-tools        # local path
-/plugin marketplace add <owner>/<repo>                   # GitHub, dạng ngắn
-/plugin marketplace add https://gitlab.../okf-plugin.git # GitLab hoặc git URL đầy đủ
-/plugin install okf-drive-tools
+git clone https://gitlab.com/xuandev/okf-drive-tools.git
+cd okf-drive-tools
 ```
 
-> Theo plan trong `plugin-claude.md`: repo đích là `isc/project_research/ai/open-knowledge-engine/okf-plugin` (GitLab). Sau khi push nội dung `okf-drive-tools/` lên đó, dùng đúng lệnh `/plugin marketplace add <url-repo-đó>`.
+### Bước 2 — Chạy install script
 
-**Claude Desktop:** chưa xác nhận được hỗ trợ plugin theo tài liệu chính thức tại thời điểm viết README này — nếu bạn dùng Desktop, kiểm tra lại trong app trước khi giả định các skill này hoạt động tương tự CLI.
+**macOS / Linux / Windows Git Bash:**
+
+```bash
+bash install.sh
+```
+
+**Windows PowerShell:**
+
+```powershell
+.\install.ps1
+```
+
+Script làm 3 việc tự động:
+1. Copy plugin vào `~/.claude/plugins/okf-drive-tools/`
+2. Copy 3 skill files vào `~/.claude/commands/`
+3. Merge hook + `CLAUDE_PLUGIN_ROOT` vào `~/.claude/settings.json`
+
+### Bước 3 — Restart Claude Code
+
+Sau khi restart, 3 skill xuất hiện trong `/`:
+
+| Skill | Dùng khi |
+|-------|----------|
+| `/okf-validate` | Kiểm tra frontmatter OKF trước khi push |
+| `/okf-push` | Đẩy tài liệu đã validate lên Drive |
+| `/okf-query` | Tra cứu tài liệu trong OpenKnowledge |
+
+---
+
+> **Claude Web / Claude Desktop:** Skills là tính năng của **Claude Code CLI** — không khả dụng trên web hay Desktop.
+> Trên Claude Web, nếu đã kết nối Google Drive connector, bạn vẫn có thể hỏi Claude đọc/ghi Drive
+> thủ công, nhưng không có `/okf-*` workflow.
 
 ## `ALLOWED_ROOT_ID` — đã tự động, không cần config
 
