@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/block-drive-out-of-scope.sh",
+            "command": "ALLOWED_ROOT_ID=\"${ALLOWED_ROOT_ID:-1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B}\" \"${CLAUDE_PLUGIN_ROOT}\"/hooks/block-drive-out-of-scope.sh",
             "timeout": 10
           }
         ]

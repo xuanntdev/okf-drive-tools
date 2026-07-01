@@ -35,13 +35,15 @@ claude --plugin-dir /path/to/okf-drive-tools
 
 **Claude Desktop:** chưa xác nhận được hỗ trợ plugin theo tài liệu chính thức tại thời điểm viết README này — nếu bạn dùng Desktop, kiểm tra lại trong app trước khi giả định các skill này hoạt động tương tự CLI.
 
-## Bắt buộc: cấu hình `ALLOWED_ROOT_ID`
+## `ALLOWED_ROOT_ID` — đã tự động, không cần config
 
-Hook scope-guard **fail-closed** — nếu biến môi trường `ALLOWED_ROOT_ID` không được set, **mọi** lệnh Drive trong 3 skill trên sẽ bị block. Set biến này = ID của folder `OpenKnowledge` (hiện tại: `1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B`, nằm trong folder `OKE`), ví dụ trong `.claude/settings.local.json`:
+Hook scope-guard **fail-closed** — nhưng `hooks/hooks.json` đã nhúng sẵn default `ALLOWED_ROOT_ID=1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B` (folder `OpenKnowledge` trong `OKE`) ngay trong lệnh gọi hook (`"${ALLOWED_ROOT_ID:-1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B}"`). Cài plugin xong là dùng được ngay, **không cần** sửa `.claude/settings.local.json`.
+
+Muốn trỏ tới folder Drive khác (vd môi trường test riêng) → set biến môi trường `ALLOWED_ROOT_ID` trước khi chạy Claude Code, giá trị đó sẽ override default:
 
 ```json
 {
-  "env": { "ALLOWED_ROOT_ID": "1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B" }
+  "env": { "ALLOWED_ROOT_ID": "<id-folder-khác>" }
 }
 ```
 
