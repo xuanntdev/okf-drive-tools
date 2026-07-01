@@ -1,0 +1,11 @@
+{
+  "name": "okf-plugin",
+  "owner": { "name": "XuanNT42" },
+  "plugins": [
+    {
+      "name": "okf-drive-tools",
+      "source": ".",
+      "description": "Validate, push và tra cứu tài liệu Open Knowledge Flow (OKF) đối chiếu với folder OpenKnowledge trên Drive của team."
+    }
+  ]
+}
