@@ -7,15 +7,19 @@ description: Đẩy một tài liệu OKF Markdown đã validate từ repo local
 
 > Chiều một: local là source of truth. Không có `update_file_content` trong MCP Drive hiện tại — update thật chỉ tạo file mới kèm versioned suffix (xem Phase 3).
 
-## Ràng buộc tuyệt đối — Drive scope guard
+## Root folder cố định
 
-Plugin này bundle hook `hooks/block-drive-out-of-scope.sh` (PreToolUse trên mọi `mcp__claude_ai_Google_Drive__*`), enforce:
-- `ALLOWED_ROOT_ID` phải được set (env) = ID folder `OpenKnowledge` — thiếu thì mọi Drive call bị BLOCK (fail-closed).
-- `list_recent_files`, `get_file_permissions` → luôn BLOCK.
-- `search_files` phải chứa `ALLOWED_ROOT_ID` trong query.
-- `create_file`/`copy_file` phải có `parents` == `ALLOWED_ROOT_ID` (hoặc subfolder đã verify).
+```
+OPENKNOWLEDGE_ROOT_ID = 1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B
+```
 
-Tuyên bố trước mỗi tool call Drive (tool + key param).
+Mọi Drive call **phải** scoped vào folder này hoặc subfolder đã verify. Không dùng ID khác, không ghi ra ngoài.
+
+- ❌ Không `list_recent_files`, không `get_file_permissions`.
+- ❌ `search_files` phải có `'1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B' in parents` hoặc subfolder id đã verify.
+- ❌ `create_file`/`copy_file` phải có `parents = [1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B]` hoặc subfolder đã verify.
+
+Tuyên bố trước mỗi Drive call (tool + key param).
 
 ## Khi nào dùng
 
@@ -23,7 +27,7 @@ Tuyên bố trước mỗi tool call Drive (tool + key param).
 ✅ User đã xác nhận đúng project/role/type trong frontmatter.
 
 ❌ **KHÔNG dùng nếu chưa validate** — refuse và gợi ý chạy `okf-validate` trước.
-❌ Không tự đoán `ALLOWED_ROOT_ID` nếu chưa biết — hỏi user hoặc đọc từ config/state đã lưu.
+❌ Không ghi ra ngoài `OPENKNOWLEDGE_ROOT_ID = 1Z2qo8erhxAFP3wqzoUB8GIYcKP3IvP7B`.
 
 ## Quy trình
 
