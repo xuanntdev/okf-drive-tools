@@ -19,29 +19,14 @@ Claude Code plugin: validate, push, và query tài liệu OKF (Open Knowledge Fl
 
 > **Yêu cầu:** Claude Code CLI · git · Python 3 · Git Bash (Windows — cho hook runtime)
 
-### One-liner (khuyến nghị)
+### Cài đặt
 
-**macOS / Linux / Windows Git Bash:**
+Mở terminal, chạy `claude` để vào Claude Code CLI, rồi gõ:
 
-```bash
-curl -sSL https://<MINIO_URL>/install.sh | bash
 ```
-
-**Windows PowerShell:**
-
-```powershell
-irm https://<MINIO_URL>/install.ps1 | iex
-```
-
-Script tự động: clone repo từ GitLab → copy skills → merge settings.json. Không cần clone tay.
-
-### Hoặc clone repo rồi chạy
-
-```bash
-git clone https://gitlab.com/xuandev/okf-drive-tools.git
-cd okf-drive-tools
-bash install.sh          # macOS/Linux/Git Bash
-# hoặc: .\install.ps1   # Windows PowerShell
+/plugin marketplace add https://gitlab.com/xuandev/okf-drive-tools.git
+/plugin install okf-drive-tools@okf-plugin
+/reload-plugins
 ```
 
 ### Sau khi cài — Restart Claude Code
