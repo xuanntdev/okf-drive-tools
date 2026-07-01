@@ -1,11 +1,28 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "okf-plugin",
-  "owner": { "name": "XuanNT42" },
+  "description": "OKF Drive Tools — validate, push và query tài liệu Open Knowledge Flow trên Google Drive.",
+  "version": "1.0.0",
+  "owner": {
+    "name": "xuanntdev"
+  },
   "plugins": [
     {
       "name": "okf-drive-tools",
-      "source": ".",
-      "description": "Validate, push và tra cứu tài liệu Open Knowledge Flow (OKF) đối chiếu với folder OpenKnowledge trên Drive của team."
+      "displayName": "OKF Drive Tools",
+      "description": "Validate, push và tra cứu tài liệu Open Knowledge Flow (OKF) đối chiếu với folder OpenKnowledge trên Drive của team.",
+      "version": "0.1.0",
+      "author": {
+        "name": "xuanntdev"
+      },
+      "repository": "https://github.com/xuanntdev/okf-drive-tools",
+      "license": "MIT",
+      "keywords": ["okf", "knowledge", "drive", "google-drive"],
+      "source": {
+        "source": "github",
+        "repo": "xuanntdev/okf-drive-tools",
+        "ref": "main"
+      }
     }
   ]
 }
