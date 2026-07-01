@@ -17,12 +17,6 @@ Claude plugin: validate, push, và query tài liệu OKF (Open Knowledge Flow) �
 
 ## Cài đặt
 
-### Claude Web (claude.ai)
-
-1. Vào **claude.ai/customize** → **Plugins** → nhấn **+**
-2. Nhập: `xuanntdev/okf-drive-tools`
-3. Nhấn **Sync** → **Install**
-
 ### Claude Code CLI / VS Code extension
 
 > **Yêu cầu:** Claude Code CLI · git · Python 3 · Git Bash (Windows — cho hook runtime)
@@ -30,7 +24,7 @@ Claude plugin: validate, push, và query tài liệu OKF (Open Knowledge Flow) �
 Mở terminal, chạy `claude` để vào Claude Code CLI, rồi gõ:
 
 ```
-/plugin marketplace add https://github.com/xuanntdev/okf-drive-tools
+/plugin marketplace add https://gitlab.com/xuandev/okf-drive-tools.git
 /plugin install okf-drive-tools@okf-plugin
 /reload-plugins
 ```
