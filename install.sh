@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
 # install.sh — cài okf-drive-tools plugin vào Claude Code
-# Chạy được trên: macOS, Linux, Windows Git Bash
+# Chạy trực tiếp: curl -sSL <url>/install.sh | bash
+# Yêu cầu: git · python3
 
 set -euo pipefail
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_URL="https://gitlab.com/xuandev/okf-drive-tools.git"
 PLUGIN_ROOT="${HOME}/.claude/plugins/okf-drive-tools"
 COMMANDS_DIR="${HOME}/.claude/commands"
 
 echo "=== OKF Drive Tools — Cài plugin ==="
-echo "  Repo   : ${REPO_DIR}"
-echo "  Plugin : ${PLUGIN_ROOT}"
 echo ""
 
-# 1. Copy plugin files vào thư mục cố định
-echo "[1/3] Copy plugin → ${PLUGIN_ROOT}"
+# 1. Clone repo vào thư mục plugin cố định
+echo "[1/3] Clone repo → ${PLUGIN_ROOT}"
 rm -rf "${PLUGIN_ROOT}"
-cp -r "${REPO_DIR}" "${PLUGIN_ROOT}"
+git clone --depth 1 "${REPO_URL}" "${PLUGIN_ROOT}"
 
 # 2. Copy skills vào ~/.claude/commands/
 echo "[2/3] Copy skills → ${COMMANDS_DIR}"

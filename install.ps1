@@ -1,21 +1,20 @@
 # install.ps1 — cài okf-drive-tools plugin vào Claude Code (Windows PowerShell)
-# Yêu cầu: Python 3 · Git Bash (hook runtime cần bash)
+# Chạy trực tiếp: irm <url>/install.ps1 | iex
+# Yêu cầu: git · python3 · Git Bash (hook runtime cần bash)
 
 $ErrorActionPreference = "Stop"
 
-$RepoDir     = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoUrl     = "https://gitlab.com/xuandev/okf-drive-tools.git"
 $PluginRoot  = "$env:USERPROFILE\.claude\plugins\okf-drive-tools"
 $CommandsDir = "$env:USERPROFILE\.claude\commands"
 
 Write-Host "=== OKF Drive Tools - Cai plugin ===" -ForegroundColor Cyan
-Write-Host "  Repo   : $RepoDir"
-Write-Host "  Plugin : $PluginRoot"
 Write-Host ""
 
-# 1. Copy plugin files vao thu muc co dinh
-Write-Host "[1/3] Copy plugin -> $PluginRoot"
+# 1. Clone repo vao thu muc plugin co dinh
+Write-Host "[1/3] Clone repo -> $PluginRoot"
 if (Test-Path $PluginRoot) { Remove-Item $PluginRoot -Recurse -Force -Confirm:$false }
-Copy-Item $RepoDir -Destination $PluginRoot -Recurse
+git clone --depth 1 $RepoUrl $PluginRoot
 
 # 2. Copy skills vao ~/.claude/commands/
 Write-Host "[2/3] Copy skills -> $CommandsDir"
@@ -35,4 +34,4 @@ Write-Host "  /okf-validate  - kiem tra frontmatter OKF"
 Write-Host "  /okf-push      - day tai lieu len Drive"
 Write-Host "  /okf-query     - tra cuu tai lieu trong OpenKnowledge"
 Write-Host ""
-Write-Host "[!] Hook script (.sh) can Git Bash de chay — cai dat tai git-scm.com/download/win" -ForegroundColor Yellow
+Write-Host "[!] Hook script (.sh) can Git Bash de chay tren Windows." -ForegroundColor Yellow
